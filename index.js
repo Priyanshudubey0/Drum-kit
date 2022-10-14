@@ -1,42 +1,42 @@
-// Detecting Button Press
-
 for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 
     document.querySelectorAll("button")[i].addEventListener("click", function () {
-        // what to do when click detected.
 
         var buttonInnerHTML = this.innerHTML;
 
-        makeSound(buttonInnerHTML)
+        makeSound(buttonInnerHTML);
+
+        buttonAnimation(buttonInnerHTML);
 
     });
 
 }
 
-// Detecting Keyboard Press
-
 document.addEventListener("keydown", function (event) {
 
     makeSound(event.key);
+
+    buttonAnimation(event.key);
+
 });
 
 function makeSound(key) {
 
 
     switch (key) {
-        case "w":
+        case "a":
             var tom1 = new Audio('sounds/tom-1.mp3');
             tom1.play();
             break;
-        case "a":
+        case "s":
             var tom2 = new Audio('sounds/tom-2.mp3');
             tom2.play();
             break;
-        case "s":
+        case "d":
             var tom3 = new Audio('sounds/tom-3.mp3');
             tom3.play();
             break;
-        case "d":
+        case "f":
             var tom4 = new Audio('sounds/tom-4.mp3');
             tom4.play();
             break;
@@ -53,7 +53,19 @@ function makeSound(key) {
             kick.play();
             break;
 
-        default:
+        default: console.log(key);
             break;
     }
+}
+
+function buttonAnimation(currentKey) {
+
+  var activeButton = document.querySelector("." + currentKey);
+
+  activeButton.classList.add("pressed");
+
+  setTimeout(function() {
+    activeButton.classList.remove("pressed");
+  }, 100);
+
 }
